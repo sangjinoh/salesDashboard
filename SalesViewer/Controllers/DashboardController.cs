@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace SalesViewer.Controllers
+﻿namespace SalesViewer.Controllers
 {
     public class DashboardController : Controller
     {
@@ -12,16 +6,19 @@ namespace SalesViewer.Controllers
         {
             return Sectors();
         }
-        public ActionResult Channels() {
+        public ActionResult Channels()
+        {
             return View("Channel");
         }
-        public ActionResult Sectors() {
+        public ActionResult Sectors()
+        {
             return View("Criteria", (object)"Sectors");
         }
-        public ActionResult Products() {
+        public ActionResult Products()
+        {
             return View("Criteria", (object)"Products");
         }
-        
+
 
     }
 }

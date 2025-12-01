@@ -1,5 +1,4 @@
-﻿using System.Web.Http;
-using SalesViewer.Models;
+﻿using SalesViewer.Models;
 
 namespace SalesViewer.Controllers.ApiControllers
 {

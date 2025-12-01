@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace SalesViewer.Models.Dtos {
-    public class CritariaSalesDaysDto {
+﻿namespace SalesViewer.Models.Dtos
+{
+    public class CritariaSalesDaysDto
+    {
         public string Criteria { get; set; }
         public decimal TodaySales { get; set; }
         public int ThisMonthUnits { get; set; }

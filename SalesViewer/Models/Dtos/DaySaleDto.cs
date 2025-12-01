@@ -1,10 +1,9 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-namespace SalesViewer.Models.Dtos {
-    public class DaySaleDto {
-        public DaySaleDto() {
+﻿namespace SalesViewer.Models.Dtos
+{
+    public class DaySaleDto
+    {
+        public DaySaleDto()
+        {
             Dynamics = new HashSet<SalesGraphDto>();
         }
         [Key]

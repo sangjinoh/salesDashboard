@@ -1,14 +1,12 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System;
-using System.Globalization;
-using System.Net.Http.Formatting;
-
-namespace SalesViewer.App_Start {
-    public class FormatterConfig {
-        public static void RegisterFormatters(MediaTypeFormatterCollection formatters) {
+﻿namespace SalesViewer.App_Start
+{
+    public class FormatterConfig
+    {
+        public static void RegisterFormatters(MediaTypeFormatterCollection formatters)
+        {
             var json = new JsonMediaTypeFormatter();
-            JsonSerializerSettings jSettings = new Newtonsoft.Json.JsonSerializerSettings() {
+            JsonSerializerSettings jSettings = new Newtonsoft.Json.JsonSerializerSettings()
+            {
                 Formatting = Formatting.Indented,
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
             };
@@ -20,12 +18,15 @@ namespace SalesViewer.App_Start {
         }
     }
 
-    public class CustomDateTimeConvertor : DateTimeConverterBase {
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) {
+    public class CustomDateTimeConvertor : DateTimeConverterBase
+    {
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
             return DateTime.Parse(reader.Value.ToString());
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
             writer.WriteValue(((DateTime)value).ToString("yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture));
         }
     }

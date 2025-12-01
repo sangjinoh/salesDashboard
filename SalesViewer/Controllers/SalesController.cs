@@ -1,6 +1,4 @@
-﻿using System.Web.Mvc;
-
-namespace SalesViewer.Controllers
+﻿namespace SalesViewer.Controllers
 {
     public class SalesController : Controller
     {

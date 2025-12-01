@@ -1,18 +1,16 @@
 ﻿using SalesViewer.Models.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Xml.Linq;
 
-namespace SalesViewer.Models {
-    public class SalesRepository : ISalesRepository {
+namespace SalesViewer.Models
+{
+    public class SalesRepository : ISalesRepository
+    {
         private readonly List<Sale> _sales;
         private readonly Dictionary<int, City> _cities;
         private readonly Dictionary<int, Company> _companies;
         private readonly Dictionary<int, Product> _products;
 
-        private SalesRepository() {
+        private SalesRepository()
+        {
             XDocument doc = XDocument.Load(HttpContext.Current.Server.MapPath("~/App_Data/SalesDashboardData.xml"));
 
             _companies = Data.Companies.ToDictionary(item => item.id, item => item);
@@ -24,7 +22,8 @@ namespace SalesViewer.Models {
             _sales = (from t in doc.Root.Elements("Sale")
                       orderby t.Attribute("SaleDate").Value
 
-                      select new Sale {
+                      select new Sale
+                      {
                           Units = int.Parse(t.Attribute("Units").Value),
                           Discount = decimal.Parse(t.Attribute("Discount").Value),
                           TotalCost = decimal.Parse(t.Attribute("TotalCost").Value),
@@ -44,40 +43,48 @@ namespace SalesViewer.Models {
 
         private static Object _lock = new Object();
 
-        public static SalesRepository Instance {
-            get {
-                if(_instance == null)
-                    lock (_lock) 
+        public static SalesRepository Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    lock (_lock)
                         return _instance ?? (_instance = new SalesRepository());
-                else 
+                else
                     return _instance;
-                
-                
+
+
             }
         }
 
-        public IEnumerable<Sale> GetSales() {
+        public IEnumerable<Sale> GetSales()
+        {
             return _sales;
         }
 
-        public IEnumerable<Company> GetCompanies() {
+        public IEnumerable<Company> GetCompanies()
+        {
             return _companies.Values.ToList();
         }
 
-        public IEnumerable<Product> GetProducts() {
+        public IEnumerable<Product> GetProducts()
+        {
             return _products.Values.ToList();
         }
 
-        public List<Sale> GetSalesByRange(DateTime startDate, DateTime endDate) {
+        public List<Sale> GetSalesByRange(DateTime startDate, DateTime endDate)
+        {
             DateTime realEndDate = new DateTime(endDate.Year, endDate.Month, endDate.Day, 23, 59, 59);
             return _sales.Where(
                     s => s.SaleDate >= startDate && s.SaleDate <= realEndDate && s.SaleDate <= DateTime.Now).ToList();
         }
 
-        public IEnumerable<DaySaleDto> GetDaySaleDtoWithDate(DateTime startDate, DateTime endDate) {
+        public IEnumerable<DaySaleDto> GetDaySaleDtoWithDate(DateTime startDate, DateTime endDate)
+        {
             var counter = 1;
             return (from sale in GetSalesByRange(startDate, endDate)
-                    group sale by new {
+                    group sale by new
+                    {
                         Product = sale.product.name,
                         Region = sale.Region,
                         Sector = sale.Sector,
@@ -88,14 +95,15 @@ namespace SalesViewer.Models {
                         sale.SaleDate.Month, sale.SaleDate.Day, 0, 0, 0)
                     } into rs
 
-                    select new DaySaleDto {
+                    select new DaySaleDto
+                    {
                         Product = rs.Key.Product,
                         Region = rs.Key.Region,
                         Sector = rs.Key.Sector,
                         SaleDate = rs.Key.SaleDate,
                         Channel = rs.Key.Channel,
                         Units = rs.Sum(s => s.Units),
-                        Amount = (double) rs.Sum(s => s.TotalCost),
+                        Amount = (double)rs.Sum(s => s.TotalCost),
                         Customer = rs.Key.Customer,
                         Discount = rs.Key.Discount,
                         Id = counter++

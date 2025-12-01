@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace SalesViewer.Models {
-    public class Sale {
+﻿namespace SalesViewer.Models
+{
+    public class Sale
+    {
         public int Units { get; set; }
         public decimal Discount { get; set; }
         public decimal TotalCost { get; set; }

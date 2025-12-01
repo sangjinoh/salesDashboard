@@ -1,0 +1,2 @@
+C:\Users\Public\Documents\DevExpress Demos 24.1\DevExtreme\HTML JS\SalesDashboard\SalesViewer\obj\Debug\SalesViewer.csproj.AssemblyReference.cache
+C:\Users\Public\Documents\DevExpress Demos 24.1\DevExtreme\HTML JS\SalesDashboard\SalesViewer\obj\Debug\SalesViewer.csproj.CoreCompileInputs.cache

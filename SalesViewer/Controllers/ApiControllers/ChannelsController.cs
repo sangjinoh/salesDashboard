@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using SalesViewer.Models.Dtos;
-using System.Web.Http.Cors;
+﻿using SalesViewer.Models.Dtos;
 
 namespace SalesViewer.Controllers.ApiControllers
 {
@@ -25,11 +21,11 @@ namespace SalesViewer.Controllers.ApiControllers
 
             }
             return (from item in result
-                   select new ChannelsGraphDto
-                   {
-                       SaleDate = item.Key,
-                       SalesByChannel = item.Value
-                   }).OrderBy(x => x.SaleDate);
+                    select new ChannelsGraphDto
+                    {
+                        SaleDate = item.Key,
+                        SalesByChannel = item.Value
+                    }).OrderBy(x => x.SaleDate);
         }
 
         public IEnumerable<CriteriaSalesDto> GetSalesByRange(DateTime startDate, DateTime endDate)
@@ -45,12 +41,14 @@ namespace SalesViewer.Controllers.ApiControllers
                    };
         }
 
-        public IEnumerable<CriteriaSalesDto> GetSalesByRangeAndId(DateTime startDate, DateTime endDate, int productId, string type) {
+        public IEnumerable<CriteriaSalesDto> GetSalesByRangeAndId(DateTime startDate, DateTime endDate, int productId, string type)
+        {
             return from sale in Repository.GetSalesByRange(startDate, endDate)
                    where productId == (type == "company" ? sale.company.id : sale.product.id)
                    group sale by sale.Channel into g
                    orderby g.Key
-                   select new CriteriaSalesDto {
+                   select new CriteriaSalesDto
+                   {
                        Criteria = g.Key,
                        Sales = g.Sum(s => s.TotalCost),
                        Units = g.Sum(s => s.Units)

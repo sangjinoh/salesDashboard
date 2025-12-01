@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace SalesViewer.Models {
-    public static class Data {
+﻿namespace SalesViewer.Models
+{
+    public static class Data
+    {
         public static readonly List<string> Channels = new List<string> { "Direct", "VARs", "Consultants", "Resellers", "Retail" };
         public static readonly List<string> Regions = new List<string> { "North America", "South America", "Europe", "Asia", "Australia", "Africa" };
         public static readonly List<string> Sectors = new List<string> { "Energy", "Manufacturing", "Telecom", "Insurance", "Banking", "Health" };
-        public static readonly List<Region> RegionsWithCities = new List<Region> { 
-                    new Region { region = "North America", cities = new List<City>(){ 
+        public static readonly List<Region> RegionsWithCities = new List<Region> {
+                    new Region { region = "North America", cities = new List<City>(){
                             new City { id = 1, name = "New York", latitude = 40.66, longtitude = -74.03, map = "usa", country = "United States", state = "New York"},
                             new City { id = 2, name = "Los Angeles", latitude = 34.02, longtitude = -118.41, map = "usa", country = "United States", state = "California"},
                             new City { id = 3, name = "Chicago", latitude = 41.83, longtitude = -87.73, map = "usa", country = "United States", state = "Illinois"},
@@ -26,8 +23,8 @@ namespace SalesViewer.Models {
                             new City { id = 14, name = "Vancouver", latitude = 49.25, longtitude = -123, map = "canada", country = "Canada", state = "British Columbia"},
                             new City { id = 15, name = "Halifax", latitude = 44.69, longtitude = -63.56, map = "canada", country = "Canada", state = "Nova Scotia"}
                         }
-                    },       
-                    new Region { region = "South America", cities = new List<City>(){ 
+                    },
+                    new Region { region = "South America", cities = new List<City>(){
                             new City { id = 16, name = "Rio de Janeiro", latitude = -22.91, longtitude = -43.44, map = "", country = "Brazil", state = ""},
                             new City { id = 17, name = "Buenos Aires", latitude = -34.61, longtitude = -58.43, map = "", country = "Argentina", state = ""},
                             new City { id = 18, name = "Manaus", latitude = -3.1, longtitude = -60.02, map = "", country = "Brazil", state = ""},
@@ -39,7 +36,7 @@ namespace SalesViewer.Models {
                             new City { id = 24, name = "Bogota", latitude = 4.59, longtitude = -74.08, map = "", country = "Colombia", state = ""},
                         }
                     },
-                    new Region { region = "Europe", cities = new List<City>(){ 
+                    new Region { region = "Europe", cities = new List<City>(){
                             new City { id = 25, name = "London", latitude = 51.50, longtitude = -0.12, map = "europe", country = "United Kingdom", state = ""},
                             new City { id = 26, name = "Berlin", latitude = 52.52, longtitude = 13.41, map = "europe", country = "Germany", state = ""},
                             new City { id = 27, name = "Madrid", latitude = 40.41, longtitude =  -3.70, map = "europe", country = "Spain", state = ""},
@@ -52,7 +49,7 @@ namespace SalesViewer.Models {
                             new City { id = 34, name = "Oslo", latitude = 59.91, longtitude = 10.73, map = "europe", country = "Norway", state = ""}
                         }
                     },
-                    new Region { region = "Asia", cities = new List<City>(){ 
+                    new Region { region = "Asia", cities = new List<City>(){
                             new City { id = 35, name = "Tokyo", latitude = 35.673343, longtitude = 139.710388, map = "eurasia", country = "Japan", state = ""},
                             new City { id = 36, name = "Beijing", latitude = 39.90, longtitude = 116.39, map = "eurasia", country = "China", state = ""},
                             new City { id = 37, name = "Jerusalem", latitude = 31.78, longtitude = 35.20, map = "eurasia", country = "Israel", state = ""},
@@ -65,7 +62,7 @@ namespace SalesViewer.Models {
                             new City { id = 44, name = "Ulan Bator", latitude = 47.91, longtitude = 106.92, map = "eurasia", country = "Mongolia", state = ""}
                         }
                     },
-                    new Region { region = "Australia", cities = new List<City>(){ 
+                    new Region { region = "Australia", cities = new List<City>(){
                             new City { id = 45, name = "Sydney", latitude = -33.79, longtitude = 150.92, map = "", country = "Australia", state = ""},
                             new City { id = 46, name = "Brisbane", latitude = -27.47, longtitude = 153.02, map = "", country = "Australia", state = ""},
                             new City { id = 47, name = "Perth", latitude = -31.96, longtitude = 115.93, map = "", country = "Australia", state = ""},
@@ -75,7 +72,7 @@ namespace SalesViewer.Models {
                             new City { id = 52, name = "Darwin", latitude = -12.59, longtitude = 131.00, map = "", country = "Australia", state = ""}
                         }
                     },
-                    new Region { region = "Africa", cities = new List<City>(){ 
+                    new Region { region = "Africa", cities = new List<City>(){
                             new City { id = 55, name = "Pretoria", latitude = -25.98, longtitude = 28.21, map = "africa", country = "South Africa", state = ""},
                             new City { id = 56, name = "Cairo", latitude = 30.05, longtitude = 31.26, map = "africa", country = "Egypt", state = ""},
                             new City { id = 57, name = "Mogadishu", latitude = 2.05, longtitude = 45.30, map = "africa", country = "Somalia", state = ""},
@@ -117,41 +114,41 @@ namespace SalesViewer.Models {
 
         };
 
-        public static readonly List<Product> Products = new List<Product> { 
-            new Product { 
-                id = 1, name = "Eco Max", description = "Low pollution industrial air cleaner.", 
+        public static readonly List<Product> Products = new List<Product> {
+            new Product {
+                id = 1, name = "Eco Max", description = "Low pollution industrial air cleaner.",
                 baseCost = 2400, listPrice = 2500, unitsInInventory = 289, unitsInManufactoring = 11,
                 plant = "Harrisburg|188 Market Street|Harrisburg, VA 00098",
                 pManager = "John Smith|188 Market Street|Harrisburg, VA 00098|(212) 555-2321|jsmith@harrisburg.com",
                 sManager = "Jeff Hall|jeffh@harrisburg.com"
             },
-            new Product { 
-                id = 2, name = "Eco Supreme", description = "High-output air cleaner powered by solar.", 
+            new Product {
+                id = 2, name = "Eco Supreme", description = "High-output air cleaner powered by solar.",
                 baseCost = 1850, listPrice = 2000, unitsInInventory = -14, unitsInManufactoring = 54,
                 plant = "Las Vegas|1445 Las Vegas Blvd|Las Vegas, NV 89120",
                 pManager = "Kent Hardy|1445 Las Vegas Blvd|Las Vegas, NV 89120|(702) 555-2321|khardy@lasvegas.com",
                 sManager = "Brent Moffat|brentf@lasvegas.com"
             },
-            new Product { 
-                id = 3, name = "EnviroCare", description = "Consumer air filtration and vent system.", 
+            new Product {
+                id = 3, name = "EnviroCare", description = "Consumer air filtration and vent system.",
                 baseCost = 1600, listPrice = 1750, unitsInInventory = 50, unitsInManufactoring = 40,
                 plant = "Los Angeles|8247 Sunset Blvd|Los Angeles, CA 90020",
                 pManager = "Jenny James|8247 Sunset Blvd|Los Angeles, CA 90020|(213) 555-2321|jennyj@losangeles.com",
                 sManager = "Carter Smith|carterc@losangeles.com"
             },
-            new Product { id = 4, name = "EnviroCare Max", description = "Industrial environmental control system.", 
+            new Product { id = 4, name = "EnviroCare Max", description = "Industrial environmental control system.",
                 baseCost = 2700, listPrice = 2800, unitsInInventory = 150, unitsInManufactoring = 13,
                 plant = "San Francisco|4242 Hill Street|San Francisco, CA 90311",
                 pManager = "Dirk Porter|4242 Hill Street|San Francisco, CA 90311|(415) 555-2321|dirkp@sanfran.com",
                 sManager = "Angela Vega|angelav@sanfran.com"
             },
-            new Product { id = 5, name = "SolarOne", description = "Environmentally friendly power generation.", 
+            new Product { id = 5, name = "SolarOne", description = "Environmentally friendly power generation.",
                 baseCost = 1350, listPrice = 1500, unitsInInventory = 100, unitsInManufactoring = 14,
                 plant = "New York|628 Broadway|New York, NY 00092",
                 pManager = "Paul Heart|628 Broadway|New York, NY 00092|(212) 555-2321|paulh@nyc.com",
                 sManager = "Karen McCarthy|karenm@nyc.com"
             },
-            new Product { id = 6, name = "SolarMax", description = "Consumer targeted solar power cell.", 
+            new Product { id = 6, name = "SolarMax", description = "Consumer targeted solar power cell.",
                 baseCost = 1150, listPrice = 2250, unitsInInventory = 67, unitsInManufactoring = 6,
                 plant = "Atlanta|289 Olympic Road|Atlanta, GA 20092",
                 pManager = "Mike Arthur|289 Olympic Road|Atlanta, GA 20092|(404) 555-2321|mikea@atl.com",

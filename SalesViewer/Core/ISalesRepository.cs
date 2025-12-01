@@ -1,9 +1,9 @@
 ﻿using SalesViewer.Models.Dtos;
-using System;
-using System.Collections.Generic;
 
-namespace SalesViewer.Models {
-    public interface ISalesRepository {
+namespace SalesViewer.Models
+{
+    public interface ISalesRepository
+    {
         IEnumerable<Sale> GetSales();
         IEnumerable<Company> GetCompanies();
         IEnumerable<Product> GetProducts();

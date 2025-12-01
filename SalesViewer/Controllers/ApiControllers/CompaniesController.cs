@@ -1,10 +1,4 @@
 ﻿using SalesViewer.Models.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http.Cors;
-using System.Web.Mvc;
 
 namespace SalesViewer.Controllers.ApiControllers
 {
@@ -14,10 +8,12 @@ namespace SalesViewer.Controllers.ApiControllers
         //
         // GET: /Companies/
 
-        public IEnumerable<CompaniesDto> GetCompanies() {
+        public IEnumerable<CompaniesDto> GetCompanies()
+        {
 
             return (from company in Repository.GetCompanies()
-                    select new CompaniesDto {
+                    select new CompaniesDto
+                    {
                         id = company.id,
                         name = company.name,
                         address = company.address,

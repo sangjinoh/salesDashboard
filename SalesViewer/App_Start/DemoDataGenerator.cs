@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml.Linq;
-using System.Linq;
-using SalesViewer.Models;
-using System.IO;
+﻿using SalesViewer.Models;
 
-namespace SalesViewer {
+namespace SalesViewer
+{
 
-    public class DemoDataGenerator {
+    public class DemoDataGenerator
+    {
 
         private static readonly List<string> Channels = Data.Channels;
         private static readonly List<string> Regions = Data.Regions;
@@ -18,17 +15,20 @@ namespace SalesViewer {
 
         private static readonly List<Product> Products = Data.Products;
 
-        public static bool IsGenerationNeed(string fileName) {
+        public static bool IsGenerationNeed(string fileName)
+        {
             return !File.Exists(fileName);
         }
 
-        public static void CreateDataFolder(string fileName) {
+        public static void CreateDataFolder(string fileName)
+        {
             Directory.CreateDirectory(Path.GetDirectoryName(fileName));
         }
 
         public static void Generate(string fileName)
         {
-            if(IsGenerationNeed(fileName)) {
+            if (IsGenerationNeed(fileName))
+            {
                 CreateDataFolder(fileName);
 
                 var doc = new XDocument();
@@ -50,10 +50,10 @@ namespace SalesViewer {
             var list = new List<Sale>();
             var rnd = new Random(0);
 
-            var sectorsWeights = new int[] {5, 3, 3, 2, 1, 1};
-            var productsWeights = new int[] {12, 20, 17, 23, 15, 13};
-            var regionsWeights = new int[] {12, 2, 7, 4, 5, 1};
-            var channelsWeights = new int[] {5, 2, 2, 3, 4};
+            var sectorsWeights = new int[] { 5, 3, 3, 2, 1, 1 };
+            var productsWeights = new int[] { 12, 20, 17, 23, 15, 13 };
+            var regionsWeights = new int[] { 12, 2, 7, 4, 5, 1 };
+            var channelsWeights = new int[] { 5, 2, 2, 3, 4 };
             var citiesWeights = new int[] { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 6, 9, 8, 7, 6 };
             var companiesWeights = new int[] { 5, 3, 2, 4, 5, 3, 2, 4, 5, 3, 2, 4, 5, 3, 2, 4, 5, 3, 2, 4, 5, 3 };
 
@@ -91,28 +91,31 @@ namespace SalesViewer {
                     int companyIdentifier = GetRankRandom(rnd, companiesWeights.Take(Companies.Count).ToArray()) + 1;
                     int channelId = GetRankRandom(rnd, getWeightsFromMonth(curDate.Month, 5));
                     int sectorId = GetRankRandom(rnd, getWeightsFromMonth(curDate.Month + 2, 6));
-                    var sale = new Sale {
+                    var sale = new Sale
+                    {
                         SaleDate = curDate,
                         Region = RegionsWithCities[regionId].region,
 
                         Channel = Channels[channelId],
                         Sector = Sectors[sectorId],
                         Units = rnd.Next(1, 5),
-                        Discount = rnd.Next(5,75) * 10,
+                        Discount = rnd.Next(5, 75) * 10,
 
                         product = new Product { id = prodId + 1 },
                         city = new City { id = RegionsWithCities[regionId].cities[cityId].id },
                         company = new Company { id = companyIdentifier }
                     };
-                    sale.TotalCost = sale.Units*Products[prodId].listPrice - sale.Discount;
+                    sale.TotalCost = sale.Units * Products[prodId].listPrice - sale.Discount;
 
                     list.Add(sale);
                 }
                 curDate = curDate.AddMinutes(15);
             }
 
-            foreach (var region in RegionsWithCities) { 
-                foreach (var city in region.cities){
+            foreach (var region in RegionsWithCities)
+            {
+                foreach (var city in region.cities)
+                {
                     storage.Add(new XElement("City",
                                              new XAttribute("id", city.id),
                                              new XAttribute("name", city.name),
@@ -125,7 +128,8 @@ namespace SalesViewer {
                 }
             }
 
-            foreach (var company in Companies) {
+            foreach (var company in Companies)
+            {
                 storage.Add(new XElement("Company",
                                             new XAttribute("id", company.id),
                                             new XAttribute("name", company.name),
@@ -135,10 +139,11 @@ namespace SalesViewer {
                                             new XAttribute("postalCode", company.postalCode),
                                             new XAttribute("fax", company.fax),
                                             new XAttribute("phone", company.phone)
-                                            ));          
+                                            ));
             }
 
-            foreach (var product in Products) {
+            foreach (var product in Products)
+            {
                 storage.Add(new XElement("Product",
                                             new XAttribute("id", product.id),
                                             new XAttribute("name", product.name),
@@ -169,12 +174,14 @@ namespace SalesViewer {
             }
         }
 
-        private static int CalculateSalesCount(IList<double> parameters, DateTime x) {
+        private static int CalculateSalesCount(IList<double> parameters, DateTime x)
+        {
             var xx = (double)(x.Hour * 60 + x.Minute - 480) / 540.0;
             return (int)Math.Round(parameters[0] * Math.Pow(xx, 6) + parameters[1] * Math.Pow(xx, 4) + parameters[2] * Math.Pow(xx, 2) + parameters[3]);
         }
 
-        private static double[] InitSaleCurveFunction(int a, int b, int c, double p) {
+        private static double[] InitSaleCurveFunction(int a, int b, int c, double p)
+        {
             double t;
             var r1 = new int[] { 1, 1, 1, b - a };
 
@@ -198,27 +205,32 @@ namespace SalesViewer {
             return res;
         }
 
-        private static int GetRankRandom(Random rnd, int[] weights) {
+        private static int GetRankRandom(Random rnd, int[] weights)
+        {
             var coords = new int[weights.Length];
             var summ = 0;
-            for (var i = 0; i < weights.Length; i++) {
+            for (var i = 0; i < weights.Length; i++)
+            {
                 summ += weights[i];
                 coords[i] = summ;
             }
 
             var next = rnd.Next(summ);
 
-            for (var i = 0; i < coords.Length; i++) {
+            for (var i = 0; i < coords.Length; i++)
+            {
                 if (next < coords[i])
                     return i;
             }
             throw new InvalidOperationException();
         }
 
-        private static int[] getWeightsFromMonth(int monthOfYear, int weightsNumber) {
+        private static int[] getWeightsFromMonth(int monthOfYear, int weightsNumber)
+        {
             int[] weights = new int[weightsNumber];
-            for (int i = 0; i < weightsNumber; i++) {
-                weights[i] = (int)Math.Pow(((Math.Sin(monthOfYear / 2 - i/ 3.14))*7),2) + 1;
+            for (int i = 0; i < weightsNumber; i++)
+            {
+                weights[i] = (int)Math.Pow(((Math.Sin(monthOfYear / 2 - i / 3.14)) * 7), 2) + 1;
             }
             return weights;
         }

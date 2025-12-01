@@ -1,8 +1,11 @@
-﻿namespace SalesViewer.Models.Dtos {
-    public class ProductsDto {
+﻿namespace SalesViewer.Models.Dtos
+{
+    public class ProductsDto
+    {
         public ProductsDto() { }
 
-        public ProductsDto(Product product) {
+        public ProductsDto(Product product)
+        {
             this.id = product.id;
             this.name = product.name;
             this.description = product.description;

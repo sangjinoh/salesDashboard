@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using SalesViewer.Models.Dtos;
 
-using System.Web.Http.OData.Builder;
-using SalesViewer.Models.Dtos;
-using WebApiContrib.Formatting.Jsonp;
-using System.Net.Http.Formatting;
-using System.Web.Http.OData.Extensions;
-
-namespace SalesViewer {
-    public static class WebApiConfig {
-        public static void Register(HttpConfiguration config) {
+namespace SalesViewer
+{
+    public static class WebApiConfig
+    {
+        public static void Register(HttpConfiguration config)
+        {
 
             config.EnableCors();
 
